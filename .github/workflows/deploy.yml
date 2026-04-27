@@ -1,0 +1,25 @@
+name: deploy
+
+on:
+  workflow_run:
+    workflows: ["delivery"]
+    types:
+      - completed
+
+jobs:
+  kubernetes-deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG_B64 }} # Usa el secreto codificado
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f kubernetes/deployment.yaml # Aplica los manifests
+          kubectl apply -f kubernetes/service.yaml
