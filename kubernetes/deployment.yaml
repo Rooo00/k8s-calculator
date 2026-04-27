@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator-deployment
+  labels:
+    app: k8s-calculator
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: k8s-calculator
+  template:
+    metadata:
+      labels:
+        app: k8s-calculator
+    spec:
+      containers:
+      - name: calculator
+        # Reemplaza <TU_USUARIO_DOCKERHUB> con tu nombre de usuario real
+        image: <TU_USUARIO_DOCKERHUB>/k8s-calculator:latest 
+        ports:
+        - containerPort: 5000 # El puerto que definimos en la app de Flask
