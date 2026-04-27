@@ -6,7 +6,8 @@ def client():
     with app.test_client() as client:
         yield client
 
-def test_suma(client):
-    rv = client.get('/suma?a=10&b=5')
+
+def test_resta(client):
+    rv = client.get('/resta?a=20&b=8')
     assert rv.status_code == 200
-    assert rv.get_json()['resultado'] == 15
+    assert rv.get_json()['resultado'] == 12
