@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
       - name: calculator
-        # Reemplaza <TU_USUARIO_DOCKERHUB> con tu nombre de usuario real
-        image: <TU_USUARIO_DOCKERHUB>/k8s-calculator:latest 
+        image: roo00oo/k8s-calculator:latest 
         ports:
-        - containerPort: 5000 # El puerto que definimos en la app de Flask
+        - containerPort: 5000
